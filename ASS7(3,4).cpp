@@ -10,7 +10,7 @@ bool isPalindrome(char str[],int s, int e)
     if (str[s] != str[e])
     return false;
 
-
+    /// recursion
     if (s < e + 1)
     return isPalindrome(str, s + 1, e - 1);
     return true;
@@ -18,7 +18,7 @@ bool isPalindrome(char str[],int s, int e)
 
 int main()
 {
-    char str[] = "geeg";
+    char str[] = "madam";
     int n = strlen(str);
 
     if (isPalindrome(str,0,n-1))
