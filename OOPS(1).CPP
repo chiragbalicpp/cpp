@@ -1,66 +1,58 @@
 #include<iostream>
 using namespace std;
 
-class CN
-{
+class complexnum{
 private:
-    int realpart; ///accessible within class
+
+    int realpart;
     int imgpart;
+
 public:
-    void Inputrealpart(int a){
-    realpart=a;
+
+    void acceptrealpart(int a){
+        realpart=a;
+        }
+
+    void acceptimgpart(int a){
+        imgpart=a;
     }
 
-    void Inputimgpart(int a){
-    imgpart=a;
+    void Printcomplexnum(){
+        cout<<realpart;
+        if (imgpart>=0) cout<<"+"<<imgpart<<"i"<<endl;
+        else cout<<imgpart<<"i"<<endl;
     }
 
-    void PrintingCN(){
-    cout<<realpart;
-    if (imgpart>=0) cout<<"+";
-    cout<<imgpart<<"i"<<endl;
+    void Add(complexnum cn){                ///calling : cn1.Add(cn2) , cn1 is getting updated and argument is cn2 referred as cn
+        realpart=realpart+cn.realpart;      ///cn2 is as it is , cn1 is changed
+        imgpart=imgpart+cn.imgpart;         ///cn1 is not mentioned as the function is being called on LHS and arg. is RHS
     }
 
-    void Add(CN cn)///parameter is cn
-    {
-    realpart=realpart+cn.realpart;  ///realpart of left side and argument is right side
-    imgpart=imgpart+cn.imgpart;
-    }
-
-    CN operator+(CN input)///argument is output
-    {
-        CN output;
-        output.realpart=realpart+input.realpart; /// left hand side cn1(realpart)(input)
-        output.imgpart=imgpart+input.imgpart;
-        return output;
+    complexnum operator+(complexnum cn){
+        complexnum cn3;
+        cn3.realpart=realpart+cn.realpart;
+        cn3.imgpart=imgpart+cn.imgpart;
+        return cn3;
     }
 };
 
 int main()
 {
+    complexnum cn1,cn2,cn3;
+    cn1.acceptrealpart(10);
+    cn1.acceptimgpart(20);
+    cn2.acceptrealpart(5);
+    cn2.acceptimgpart(15);
+    cn1.Printcomplexnum();
+    cn2.Printcomplexnum();
 
-CN cn1,cn2,cn;
+    cn1.Add(cn2);
+    cout<<"updated cn1:"<<endl;
+    cn1.Printcomplexnum();
+    cout<<"As it is cn2:"<<endl;
+    cn2.Printcomplexnum();
 
-cn1.Inputrealpart(10);
-cn1.Inputimgpart(20);
-
-cn2.Inputrealpart(-5);
-cn2.Inputimgpart(-80);
-
-cn1.PrintingCN();
-cn2.PrintingCN();
-
-cn1.Add(cn2);
-cn1.PrintingCN();  /// cn1 is updated
-cn2.PrintingCN();  ///unchanged because value added in cn1
-
-
-cout <<endl;
-
-cn=cn1+cn2;
-cn1.PrintingCN();
-cn2.PrintingCN();
-cn.PrintingCN();
-
-
+    cout<<"updated cn1+cn2 by + operator :"<<endl;
+    cn3=cn1+cn2;
+    cn3.Printcomplexnum();
 }
